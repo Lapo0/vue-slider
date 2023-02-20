@@ -54,7 +54,6 @@ const { createApp } = Vue
         },
         mounted() {
             setInterval(() => {
-                currentIndex = (currentIndex + 1) % slides.length;
                 this.nextSlide();
             }, 3000);
         },
