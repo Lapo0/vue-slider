@@ -41,21 +41,23 @@ const { createApp } = Vue
             }
         },
         methods: {
-            updateSlideClasses(prevIndex, nextIndex) {
-              this.slides[prevIndex].isActive = false;
-              this.slides[nextIndex].isActive = true;
-            },
             nextSlide() {
-              const nextIndex = (this.currentIndex + 1) % this.slides.length;
-              this.updateSlideClasses(this.currentIndex, nextIndex);
-              this.currentIndex = nextIndex;
+              this.slides[this.currentIndex].isActive = false;
+              this.currentIndex = (this.currentIndex + 1) % this.slides.length;
+              this.slides[this.currentIndex].isActive = true;
             },
             prevSlide() {
-              const prevIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
-              this.updateSlideClasses(this.currentIndex, prevIndex);
-              this.currentIndex = prevIndex;
+              this.slides[this.currentIndex].isActive = false;
+              this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+              this.slides[this.currentIndex].isActive = true;
             },
-          },
+        },
+        mounted() {
+            setInterval(() => {
+                currentIndex = (currentIndex + 1) % slides.length;
+                this.nextSlide();
+            }, 3000);
+        },
     }
     
 const app = createApp(option)
