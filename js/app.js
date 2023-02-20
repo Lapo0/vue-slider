@@ -37,17 +37,16 @@ const { createApp } = Vue
         },
         methods: {
             nextSlide() {
-              this.currentIndex = (this.currentIndex + 1) % this.slides.length;
-            },
-            prevSlide() {
-              this.currentIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
-            }
-          },
-          mounted() {
-            setInterval(() => {
-              this.nextSlide();
-            }, 5000);
-          }
+                const nextIndex = (this.currentIndex + 1) % this.slides.length;
+                this.updateSlideClasses(this.currentIndex, nextIndex);
+                this.currentIndex = nextIndex;
+              },
+              prevSlide() {
+                const prevIndex = (this.currentIndex - 1 + this.slides.length) % this.slides.length;
+                this.updateSlideClasses(this.currentIndex, prevIndex);
+                this.currentIndex = prevIndex;
+              },
+        },
     }
     
 const app = createApp(option)
